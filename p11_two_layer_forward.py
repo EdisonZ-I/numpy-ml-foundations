@@ -10,7 +10,6 @@ def two_layer_forward(features, weight1, bias1, weight2, bias2):
     hidden_linear = features @ weight1 + bias1
     hidden = relu(hidden_linear)
     logits = hidden @ weight2 + bias2
-    print(hidden_linear, hidden, logits)
     return logits, {"features": features, "hidden_linear": hidden_linear, "hidden": hidden}
 
 if __name__ == "__main__":
