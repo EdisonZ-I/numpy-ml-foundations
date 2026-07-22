@@ -36,15 +36,18 @@ def train_two_layer_network(
 if __name__ == "__main__":
     from test_helpers import check_equal, check_true
     rng = np.random.default_rng(0)
-    features = rng.normal(loc = 2, scale = 5, size = (10, 5))
-    labels = rng.integers(0 ,5 , size = 10)
+    features = np.array([
+        [-2.0, -2.0], [-1.0, -1.0], [1.0, 1.0], [2.0, 2.0],
+        [-2.0, 2.0], [-1.0, 1.0], [1.0, -1.0], [2.0, -2.0],
+    ])
+    labels = np.array([0, 0, 0, 0, 1, 1, 1, 1])
 
     parameters, history = train_two_layer_network(
         features,
         labels,
         hidden_size=8,
-        num_classes=5,
-        epochs=1000,
+        num_classes=2,
+        epochs=2000,
         learning_rate=0.1,
         seed=0,
     )
