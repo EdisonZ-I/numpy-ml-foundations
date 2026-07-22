@@ -32,6 +32,7 @@ def two_layer_loss_and_gradients(
     logits = hidden @ weight2 + bias2
     probability = softmax(logits)
     loss = - np.log(probability[np.arange(labels.shape[0]), labels]).mean()
+    accuracy = (logits.argmax(axis=1) == labels).sum() / labels.shape[0]
 
     logits_gradient = probability.copy()
     logits_gradient[np.arange(labels.shape[0]),labels] -= 1
@@ -47,7 +48,7 @@ def two_layer_loss_and_gradients(
     weight1_gradient = features.T @ hidden_linear_gradient
     bias1_gradient = hidden_linear_gradient.sum(axis=0)
 
-    gradient = {"weight1": weight1_gradient, "bias1": bias1_gradient, "weight2": Weight2_gradient, "bias2": bias2_gradient}
+    gradient = {"weight1": weight1_gradient, "bias1": bias1_gradient, "weight2": Weight2_gradient, "bias2": bias2_gradient, "accuracy": accuracy}
 
     return loss, gradient
 
