@@ -2,7 +2,7 @@
 import numpy as np
 
 def one_hot(labels, num_classes):
-    if labels[labels>num_classes].size + labels[labels<0].size > 0 :
+    if labels[labels >= num_classes].size + labels[labels<0].size > 0 :
         return None
     result = np.zeros((labels.shape[0], num_classes))
     i = range(labels.shape[0])
@@ -16,7 +16,11 @@ def evaluate_logits(logits, labels):
     prediction = result["predictions"] = logits.argmax(axis = 1)
     result["accuracy"] = (labels == prediction).sum() / len(labels)
     confusion_matrix = np.zeros((labels.max()+1, labels.max()+1))
-    confusion_matrix[prediction, labels] += 1
+    #confusion_matrix[labels, prediction] += 1
+    num_classes = logits.shape[1]
+    confusion_matrix = np.zeros((num_classes, num_classes), dtype=int)
+    np.add.at(confusion_matrix, (labels, prediction), 1)
+    
     result["confusion_matrix"] = confusion_matrix
     return result
 

@@ -11,7 +11,7 @@ def linear_classifier_loss(features, labels, weights, bias):
     logits = features @ weights + bias
     prob = softmax(logits)
     pred = prob.argmax(axis = 1)
-    loss_list = -np.log(prob[labels])
+    loss_list = -np.log(prob[np.arange(labels.shape[0]), labels])
     loss = loss_list.mean()
     return (loss, prob, pred)
 

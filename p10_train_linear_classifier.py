@@ -35,7 +35,7 @@ def train_linear_classifier(
     batch_terms = ceil(features.shape[0] / batch_size)
 
     for epoch in range(epochs):
-        shuffled_batches = make_shuffled_batches(features, labels, batch_size, seed)
+        shuffled_batches = make_shuffled_batches(features, labels, batch_size, seed + epoch)
         for term in range(batch_terms) :#training
            loss, weights_gradient, bias_gradient = linear_loss_and_gradients(shuffled_batches[term][0], shuffled_batches[term][1], weights, bias)
            weights -= weights_gradient * learning_rate

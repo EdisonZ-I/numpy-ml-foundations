@@ -4,13 +4,13 @@ import numpy as np
 def pairwise_squared_distances(test_features, train_features):
     if test_features.shape[1] != train_features.shape[1]:
         return None
-    i, j = np.indices((test_features.shape[0], test_features.shape[0]))
+    i, j = np.indices((train_features.shape[0], test_features.shape[0]))
     diff_square = (train_features[i] - test_features[j]) ** 2
     result = diff_square.sum(axis = 2).T
     return result
 
 def predict_1nn(train_features, train_labels, test_features):
-    if test_features.shape != train_features.shape:
+    if test_features.shape[1] != train_features.shape[1]:
         return None
     maxarg = pairwise_squared_distances(test_features, train_features).argmin(axis = 1)
     result = train_labels[maxarg]

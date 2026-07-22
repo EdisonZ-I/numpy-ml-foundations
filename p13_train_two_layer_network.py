@@ -27,6 +27,7 @@ def train_two_layer_network(
         bias1 -= gradients["bias1"] * learning_rate
         weight2 -= gradients["weight2"] * learning_rate
         bias2 -= gradients["bias2"] * learning_rate
+        loss, gradients = two_layer_loss_and_gradients(features, labels, weight1, bias1, weight2, bias2)
         history.append({"epoch": epoch+1, "loss": loss, "accuracy": gradients["accuracy"]})
         #print(history[-1])
     parameter = {"weight1": weight1, "bias1": bias1, "weight2": weight2, "bias2": bias2}
