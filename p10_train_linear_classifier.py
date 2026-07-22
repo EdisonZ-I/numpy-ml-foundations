@@ -32,17 +32,17 @@ def train_linear_classifier(
     weights = np.zeros((features.shape[1], num_classes))
     bias = np.zeros((num_classes, ))
     history = []
-    shuffled_batches = make_shuffled_batches(features, labels, batch_size, seed)
     batch_terms = ceil(features.shape[0] / batch_size)
 
     for epoch in range(epochs):
+        shuffled_batches = make_shuffled_batches(features, labels, batch_size, seed)
         for term in range(batch_terms) :#training
            loss, weights_gradient, bias_gradient = linear_loss_and_gradients(shuffled_batches[term][0], shuffled_batches[term][1], weights, bias)
            weights -= weights_gradient * learning_rate
            bias -= bias_gradient * learning_rate
         accuracy, loss = loss_and_accuracy(features, labels, weights, bias)   #record into history
         history.append({"epoch": epoch+1, "loss": loss, "accuracy": accuracy})
-        print(history[-1])
+        #print(history[-1])
     return weights, bias, history
 
 

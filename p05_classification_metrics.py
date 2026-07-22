@@ -2,7 +2,7 @@
 import numpy as np
 
 def one_hot(labels, num_classes):
-    if labels[labels>num_classes].size > 0:
+    if labels[labels>num_classes].size + labels[labels<0].size > 0 :
         return None
     result = np.zeros((labels.shape[0], num_classes))
     i = range(labels.shape[0])

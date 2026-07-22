@@ -14,10 +14,10 @@ def train_two_layer_network(
     #init
     rng = np.random.default_rng(seed)
     weight1 = rng.normal(loc = 0, scale = 0.5, size=(features.shape[1],hidden_size))
-    bias1 = rng.normal(loc = 0, scale = 0.5, size=(hidden_size, ))
+    bias1 = np.zeros((hidden_size, ))
 
     weight2 = rng.normal(loc = 0, scale = 0.5, size=(hidden_size, num_classes))
-    bias2 = rng.normal(loc = 0, scale = 0.5, size=(num_classes, ))
+    bias2 = np.zeros((num_classes, ))
 
     history =[]
 
@@ -28,7 +28,7 @@ def train_two_layer_network(
         weight2 -= gradients["weight2"] * learning_rate
         bias2 -= gradients["bias2"] * learning_rate
         history.append({"epoch": epoch+1, "loss": loss, "accuracy": gradients["accuracy"]})
-        print(history[-1])
+        #print(history[-1])
     parameter = {"weight1": weight1, "bias1": bias1, "weight2": weight2, "bias2": bias2}
 
     return parameter, history

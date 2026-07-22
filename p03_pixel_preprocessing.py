@@ -7,8 +7,8 @@ def preprocess_pixels(train_features, test_features):
     train_features1 = train_features / 255.0
     test_features1 = test_features / 255.0
     
-    mean = train_features1.mean(axis=1)
-    scale = (train_features1.max(axis=1) - train_features1.min(axis=1)) / 2
+    mean = train_features1.mean(axis=0)
+    scale = np.std(train_features1, axis=0)
     scale [scale == 0] = 1.0
     processed_train = (train_features1 - mean) / scale
     processed_test = (test_features1 - mean) / scale

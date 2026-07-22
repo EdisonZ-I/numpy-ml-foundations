@@ -2,9 +2,9 @@
 import numpy as np
 
 def softmax(logits):
-    safe = logits - logits.max(axis = 1)
+    safe = logits - logits.max(axis = 1, keepdims = True)
     safe = np.exp(safe)
-    safe = safe / safe.sum(axis=1)
+    safe = safe / safe.sum(axis=1, keepdims = True)
     return safe
 
 def linear_classifier_loss(features, labels, weights, bias):

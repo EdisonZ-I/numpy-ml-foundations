@@ -2,7 +2,7 @@
 import numpy as np
 
 def pairwise_squared_distances(test_features, train_features):
-    if test_features.shape != train_features.shape:
+    if test_features.shape[1] != train_features.shape[1]:
         return None
     i, j = np.indices((test_features.shape[0], test_features.shape[0]))
     diff_square = (train_features[i] - test_features[j]) ** 2
